@@ -16,9 +16,9 @@
                     },
                     colors: {
                         // Kora Brand Colors - Primary (from guidelines)
-                        'kora-primary': '#00837A',
-                        'kora-primary-dark': '#016054', 
-                        'kora-primary-light': '#01AC9D',
+                        'kora-primary': '#016054',
+                        'kora-primary-dark': '#013d2f', 
+                        'kora-primary-light': '#e6e2dc',
                         // Kora Brand Colors - Gold (from guidelines)
                         'kora-gold': '#A18D2C',
                         'kora-gold-light': '#C9B037',
@@ -31,26 +31,42 @@
                         'kora-white': '#FFFFFF',
                         // Additional sophisticated colors
                         'kora-cream': '#F9F6D5',
-                        'kora-beige': '#E8E0D0',
+                        'kora-beige': '#e6e2dc',
                     },
                 }
             }
         }
     </script>
     <style>
+        /*
+        ================================================================
+        BACKGROUND TOGGLE SYSTEM - EASY SWITCHING INSTRUCTIONS
+        ================================================================
+        
+        CURRENT: Video Background (hero-background-video: display: block)
+        
+        TO SWITCH TO CAROUSEL:
+        1. Change .hero-background-video { display: block; } to { display: none; }
+        2. Change .hero-background-carousel { display: none; } to { display: block; }
+        
+        TO SWITCH BACK TO VIDEO:
+        1. Change .hero-background-carousel { display: block; } to { display: none; }
+        2. Change .hero-background-video { display: none; } to { display: block; }
+        
+        Both backgrounds are in the HTML - just toggle the display property!
+        ================================================================
+        */
+        
         .gradient-text {
-            background: linear-gradient(135deg, #00837A 0%, #A18D2C 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            /* Removed gradient for Kora text - no longer used */
         }
         
         .brand-gradient {
-            background: linear-gradient(135deg, #00837A 0%, #016054 50%, #01AC9D 100%);
+            background: #01443a;
         }
         
         .gold-gradient {
-            background: linear-gradient(135deg, #A18D2C 0%, #C9B037 100%);
+            background: #A18D2C;
         }
         
         .sophisticated-shadow {
@@ -73,6 +89,20 @@
             display: inline-block;
             margin-right: 8px;
         }
+
+        /* Background Toggle System */
+        .hero-background-video {
+            display: block;
+        }
+        
+        .hero-background-carousel {
+            display: none;
+        }
+        
+        /* To switch to carousel: change classes above to:
+           .hero-background-video { display: none; }
+           .hero-background-carousel { display: block; }
+        */
     </style>
 </head>
 <body class="bg-kora-cream text-kora-dark">
@@ -106,14 +136,14 @@
                 
                 <!-- CTA Button -->
                 <div class="hidden md:block">
-                    <a href="#contact" class="brand-gradient text-kora-white px-6 py-2 rounded-lg text-sm font-semibold sophisticated-shadow hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                    <a href="#contact" class="inline-block bg-kora-primary-dark text-kora-cream px-6 py-3 rounded-lg font-semibold text-sm sophisticated-shadow hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                         Schedule Demo
                     </a>
                 </div>
                 
                 <!-- Mobile menu button -->
                 <div class="md:hidden">
-                    <button type="button" class="text-kora-dark hover:text-kora-primary focus:outline-none focus:text-kora-primary">
+                    <button id="mobile-menu-button" type="button" class="text-kora-dark hover:text-kora-primary focus:outline-none focus:text-kora-primary" aria-label="Toggle mobile menu">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
@@ -122,7 +152,7 @@
             </div>
             
             <!-- Mobile Navigation -->
-            <div class="md:hidden hidden bg-kora-cream border-t border-kora-primary/30">
+            <div id="mobile-menu" class="md:hidden hidden bg-kora-cream border-t border-kora-primary/30">
                 <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                     <a href="#value-proposition" class="text-kora-dark hover:text-kora-primary block px-3 py-2 text-sm font-medium">Why Kora</a>
                     <a href="#how-it-works" class="text-kora-dark hover:text-kora-primary block px-3 py-2 text-sm font-medium">How It Works</a>
@@ -131,7 +161,7 @@
                     <a href="#dpp-ready" class="text-kora-dark hover:text-kora-primary block px-3 py-2 text-sm font-medium">DPP Ready</a>
                     <a href="#about" class="text-kora-dark hover:text-kora-primary block px-3 py-2 text-sm font-medium">About</a>
                     <a href="#contact" class="text-kora-dark hover:text-kora-primary block px-3 py-2 text-sm font-medium">Contact</a>
-                    <a href="#contact" class="brand-gradient text-kora-white px-6 py-2 rounded-lg font-semibold mt-2 w-full text-sm block text-center">
+                    <a href="#contact" class="bg-kora-primary-dark text-kora-cream px-6 py-3 rounded-lg font-semibold mt-2 w-full text-sm block text-center sophisticated-shadow hover:shadow-lg transform hover:scale-105 transition-all duration-300">
                         Schedule Demo
                     </a>
                 </div>
@@ -142,11 +172,21 @@
     <!-- ================================================ -->
     <!-- HERO SECTION -->
     <!-- ================================================ -->
-    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-kora-primary via-kora-primary-dark to-kora-primary-light pt-16">
-        <!-- Background Carousel -->
-        <div class="absolute inset-0 z-0">
+    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-kora-primary pt-16">
+        <!-- Video Background -->
+        <div class="absolute inset-0 z-0 hero-background-video">
+            <video autoplay muted loop class="h-full w-full object-cover">
+                <source src="https://videos.pexels.com/video-files/4069480/4069480-uhd_2560_1440_25fps.mp4" type="video/mp4">
+                <!-- Fallback for browsers that don't support video -->
+                <div class="h-full w-full bg-cover bg-center bg-gradient-to-br from-kora-primary via-kora-primary-dark to-kora-primary-light"></div>
+            </video>
+            <!-- Green overlay filter for better text readability -->
+            <div class="absolute inset-0 bg-gradient-to-br from-kora-primary/50 to-kora-primary/50"></div>
+        </div>
+        
+        <!-- Carousel Background -->
+        <div class="absolute inset-0 z-0 hero-background-carousel">
             <div class="carousel-container relative h-full w-full">
-                <!-- Carousel Images -->
                 <div class="carousel-slide absolute inset-0 opacity-20 transition-opacity duration-1000">
                     <div class="h-full w-full bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 131, 122, 0.7), rgba(0, 131, 122, 0.7)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
                 </div>
@@ -178,13 +218,10 @@
                 </p>
                 
                 <!-- CTA Buttons -->
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="#contact" class="gold-gradient text-kora-dark px-8 py-4 rounded-lg font-semibold text-lg sophisticated-shadow hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                <div class="flex justify-center items-center">
+                    <a href="#contact" class="bg-kora-primary-dark text-kora-cream px-8 py-4 rounded-lg font-semibold text-lg sophisticated-shadow hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                         Schedule a Demo
                     </a>
-                    <button class="border-2 border-kora-gold-light text-kora-gold-light px-8 py-4 rounded-lg font-semibold text-lg hover:bg-kora-gold-light hover:text-kora-dark transition-all duration-300">
-                        Learn More
-                    </button>
                 </div>
             </div>
         </div>
@@ -193,13 +230,13 @@
     <!-- ================================================ -->
     <!-- VALUE PROPOSITION SECTION -->
     <!-- ================================================ -->
-    <section id="value-proposition" class="py-20 bg-white">
+    <section id="value-proposition" class="py-20 bg-kora-cream">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold text-kora-dark mb-6">
-                    Why Brands Choose <span class="gradient-text">Kora</span>
+                    Why Brands Choose <span class="text-kora-primary font-bold">Kora</span>
                 </h2>
-                <p class="text-xl text-kora-secondary max-w-3xl mx-auto">
+                <p class="text-xl text-kora-dark max-w-3xl mx-auto">
                     Differentiate from Aura, Arianee, and Eon with our complete solution
                 </p>
             </div>
@@ -213,7 +250,7 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-kora-dark mb-4">Easy Product Registration</h3>
-                    <p class="text-kora-secondary">
+                    <p class="text-kora-dark">
                         Simple product registration with unique digital IDs that ensure authenticity from the moment of creation.
                     </p>
                 </div>
@@ -226,7 +263,7 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-kora-dark mb-4">Instant Authentication</h3>
-                    <p class="text-kora-secondary">
+                    <p class="text-kora-dark">
                         Instant authentication via mobile app that makes verification simple for consumers without technical complexity.
                     </p>
                 </div>
@@ -239,7 +276,7 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-kora-dark mb-4">Seamless Ownership Transfers</h3>
-                    <p class="text-kora-secondary">
+                    <p class="text-kora-dark">
                         Effortless ownership transfers that track the complete journey of products through their lifecycle.
                     </p>
                 </div>
@@ -252,7 +289,7 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-kora-dark mb-4">Brand-Controlled Resale Tracking</h3>
-                    <p class="text-kora-secondary">
+                    <p class="text-kora-dark">
                         Monitor and participate in secondary market revenue with transparent tracking and revenue participation.
                     </p>
                 </div>
@@ -265,7 +302,7 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-kora-dark mb-4">DPP Compliance Ready</h3>
-                    <p class="text-kora-secondary">
+                    <p class="text-kora-dark">
                         Compliant with Digital Product Passport (DPP) requirements, future-proofing your business for 2026 regulations.
                     </p>
                 </div>
@@ -276,13 +313,13 @@
     <!-- ================================================ -->
     <!-- HOW IT WORKS SECTION -->
     <!-- ================================================ -->
-    <section id="how-it-works" class="py-20 bg-kora-primary">
+    <section id="how-it-works" class="py-20 bg-kora-beige">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-kora-white mb-6">
-                    How <span class="text-kora-gold-light">Kora</span> Works
+                <h2 class="text-4xl md:text-5xl font-bold text-kora-dark mb-6">
+                    How <span class="text-kora-primary">Kora</span> Works
                 </h2>
-                <p class="text-xl text-kora-cream max-w-3xl mx-auto">
+                <p class="text-xl text-kora-dark max-w-3xl mx-auto">
                     A simple process for both brands and consumers
                 </p>
             </div>
@@ -291,12 +328,12 @@
                 <!-- Step 1 -->
                 <div class="text-center group">
                     <div class="relative mb-8">
-                        <div class="w-24 h-24 gold-gradient rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
+                        <div class="w-24 h-24 bg-kora-gold rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
                             <span class="text-2xl font-bold text-kora-dark">1</span>
                         </div>
                     </div>
-                    <h3 class="text-2xl font-semibold text-kora-white mb-4">Register Products</h3>
-                    <p class="text-kora-cream text-lg">
+                    <h3 class="text-2xl font-semibold text-kora-dark mb-4">Register Products</h3>
+                    <p class="text-kora-dark text-lg">
                         Brands register products with unique digital IDs through our dashboard or API integration.
                     </p>
                 </div>
@@ -304,12 +341,12 @@
                 <!-- Step 2 -->
                 <div class="text-center group">
                     <div class="relative mb-8">
-                        <div class="w-24 h-24 gold-gradient rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
+                        <div class="w-24 h-24 bg-kora-gold rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
                             <span class="text-2xl font-bold text-kora-dark">2</span>
                         </div>
                     </div>
-                    <h3 class="text-2xl font-semibold text-kora-white mb-4">Verify Authenticity</h3>
-                    <p class="text-kora-cream text-lg">
+                    <h3 class="text-2xl font-semibold text-kora-dark mb-4">Verify Authenticity</h3>
+                    <p class="text-kora-dark text-lg">
                         Consumers use our app to scan and instantly verify product authenticity.
                     </p>
                 </div>
@@ -317,12 +354,12 @@
                 <!-- Step 3 -->
                 <div class="text-center group">
                     <div class="relative mb-8">
-                        <div class="w-24 h-24 gold-gradient rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
+                        <div class="w-24 h-24 bg-kora-gold rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
                             <span class="text-2xl font-bold text-kora-dark">3</span>
                         </div>
                     </div>
-                    <h3 class="text-2xl font-semibold text-kora-white mb-4">Track & Transfer</h3>
-                    <p class="text-kora-cream text-lg">
+                    <h3 class="text-2xl font-semibold text-kora-dark mb-4">Track & Transfer</h3>
+                    <p class="text-kora-dark text-lg">
                         Track ownership history and seamlessly transfer ownership when buying or selling.
                     </p>
                 </div>
@@ -333,13 +370,13 @@
     <!-- ================================================ -->
     <!-- SOLUTIONS SECTION -->
     <!-- ================================================ -->
-    <section id="solutions" class="py-20 bg-white">
+    <section id="solutions" class="py-20 bg-kora-primary">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-kora-dark mb-6">
-                    Our <span class="gradient-text">Solutions</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-kora-cream mb-6">
+                    Our <span class="text-kora-gold-light">Solutions</span>
                 </h2>
-                <p class="text-xl text-kora-secondary max-w-3xl mx-auto">
+                <p class="text-xl text-kora-cream max-w-3xl mx-auto">
                     Comprehensive tools for product authenticity and market transparency
                 </p>
             </div>
@@ -348,17 +385,17 @@
                 <!-- User-Friendly App -->
                 <div class="bg-kora-cream/50 backdrop-blur-sm rounded-2xl p-8 border border-kora-beige card-hover">
                     <div class="flex items-start gap-6">
-                        <div class="w-16 h-16 brand-gradient rounded-xl flex items-center justify-center flex-shrink-0">
-                            <svg class="w-8 h-8 text-kora-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="w-16 h-16 bg-kora-primary-dark rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg class="w-8 h-8 text-kora-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                             </svg>
                         </div>
                         <div>
                             <h3 class="text-2xl font-semibold text-kora-dark mb-4">User-Friendly App</h3>
-                            <p class="text-kora-secondary mb-4">
+                            <p class="text-kora-dark mb-4">
                                 A user-friendly app enables consumers to easily verify product authenticity and ownership, making it difficult for counterfeits to be purchased without their knowledge.
                             </p>
-                            <p class="text-kora-secondary/80 text-sm">
+                            <p class="text-kora-dark/80 text-sm">
                                 Consumers won't need to deal with the complexity of blockchain, wallets, or other technical barriers.
                             </p>
                         </div>
@@ -368,14 +405,14 @@
                 <!-- Ownership Tracking -->
                 <div class="bg-kora-cream/50 backdrop-blur-sm rounded-2xl p-8 border border-kora-beige card-hover">
                     <div class="flex items-start gap-6">
-                        <div class="w-16 h-16 brand-gradient rounded-xl flex items-center justify-center flex-shrink-0">
-                            <svg class="w-8 h-8 text-kora-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="w-16 h-16 bg-kora-primary-dark rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg class="w-8 h-8 text-kora-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v6a2 2 0 002 2h2m0-8h10a2 2 0 012 2v6a2 2 0 01-2 2H9m0-8V5a2 2 0 012-2h6a2 2 0 012 2v.5"></path>
                             </svg>
                         </div>
                         <div>
                             <h3 class="text-2xl font-semibold text-kora-dark mb-4">Ownership Tracking</h3>
-                            <p class="text-kora-secondary">
+                            <p class="text-kora-dark">
                                 Seamlessly record each product transfer from factory to secondary market, ensuring complete provenance and preventing cloned products.
                             </p>
                         </div>
@@ -385,14 +422,14 @@
                 <!-- Secondary Market Monetization -->
                 <div class="bg-kora-cream/50 backdrop-blur-sm rounded-2xl p-8 border border-kora-beige card-hover">
                     <div class="flex items-start gap-6">
-                        <div class="w-16 h-16 brand-gradient rounded-xl flex items-center justify-center flex-shrink-0">
-                            <svg class="w-8 h-8 text-kora-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="w-16 h-16 bg-kora-primary-dark rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg class="w-8 h-8 text-kora-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
                             </svg>
                         </div>
                         <div>
                             <h3 class="text-2xl font-semibold text-kora-dark mb-4">Secondary Market Monetization</h3>
-                            <p class="text-kora-secondary">
+                            <p class="text-kora-dark">
                                 A small fee at each ownership transfer unlocks new revenue streams for brands in the secondary market.
                             </p>
                         </div>
@@ -402,14 +439,14 @@
                 <!-- DPP Compliance -->
                 <div class="bg-kora-cream/50 backdrop-blur-sm rounded-2xl p-8 border border-kora-beige card-hover">
                     <div class="flex items-start gap-6">
-                        <div class="w-16 h-16 brand-gradient rounded-xl flex items-center justify-center flex-shrink-0">
-                            <svg class="w-8 h-8 text-kora-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="w-16 h-16 bg-kora-primary-dark rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg class="w-8 h-8 text-kora-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                         </div>
                         <div>
                             <h3 class="text-2xl font-semibold text-kora-dark mb-4">Digital Product Passport Compliance</h3>
-                            <p class="text-kora-secondary">
+                            <p class="text-kora-dark">
                                 Future-proof operations with seamless compliance for upcoming 2026 regulations.
                             </p>
                         </div>
@@ -418,18 +455,18 @@
             </div>
             
             <!-- Seamless Integration highlight -->
-            <div class="bg-gradient-to-r from-kora-primary/10 to-kora-gold/10 rounded-2xl p-8 md:p-12 border border-kora-primary/20">
+            <div class="bg-gradient-to-r from-kora-cream/20 to-kora-gold/20 rounded-2xl p-8 md:p-12 border border-kora-cream/30">
                 <div class="text-center">
-                    <div class="w-20 h-20 brand-gradient rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-10 h-10 text-kora-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-20 h-20 bg-kora-primary-dark rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-kora-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
                         </svg>
                     </div>
-                    <h3 class="text-3xl font-bold text-kora-dark mb-4">Seamless Integration</h3>
-                    <p class="text-xl text-kora-secondary max-w-2xl mx-auto mb-8">
+                    <h3 class="text-3xl font-bold text-kora-cream mb-4">Seamless Integration</h3>
+                    <p class="text-xl text-kora-cream max-w-2xl mx-auto mb-8">
                         Our platform offers easy API integration, making it straightforward for brands and marketplaces to adopt our solution.
                     </p>
-                    <button class="brand-gradient text-kora-white px-8 py-3 rounded-lg font-semibold sophisticated-shadow hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+                    <button class="bg-kora-primary-dark text-kora-cream px-8 py-3 rounded-lg font-semibold sophisticated-shadow hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                         View API Documentation
                     </button>
                 </div>
@@ -440,79 +477,79 @@
     <!-- ================================================ -->
     <!-- PRODUCT SECTION -->
     <!-- ================================================ -->
-    <section id="product" class="py-20 bg-kora-primary">
+    <section id="product" class="py-20 bg-kora-cream">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-kora-white mb-6">
-                    Our <span class="text-kora-gold-light">Product</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-kora-dark mb-6">
+                    Our <span class="text-kora-primary">Product</span>
                 </h2>
-                <p class="text-xl text-kora-cream max-w-3xl mx-auto">
+                <p class="text-xl text-kora-dark max-w-3xl mx-auto">
                     Complete ecosystem for product authenticity and ownership tracking
                 </p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Unique IDs & ownership tracking -->
-                <div class="bg-kora-white/10 backdrop-blur-sm rounded-xl p-8 border border-kora-white/20 card-hover">
-                    <div class="w-16 h-16 gold-gradient rounded-xl flex items-center justify-center mb-6">
+                <div class="bg-white/80 backdrop-blur-sm rounded-xl p-8 border border-kora-beige card-hover">
+                    <div class="w-16 h-16 bg-kora-gold rounded-xl flex items-center justify-center mb-6">
                         <svg class="w-8 h-8 text-kora-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-kora-white mb-4">Unique IDs & Ownership Tracking</h3>
-                    <p class="text-kora-cream">
+                    <h3 class="text-xl font-semibold text-kora-dark mb-4">Unique IDs & Ownership Tracking</h3>
+                    <p class="text-kora-dark">
                         Unique blockchain identifiers ensuring traceability and ownership tracking for each item.
                     </p>
                 </div>
 
                 <!-- User-friendly App -->
-                <div class="bg-kora-white/10 backdrop-blur-sm rounded-xl p-8 border border-kora-white/20 card-hover">
-                    <div class="w-16 h-16 gold-gradient rounded-xl flex items-center justify-center mb-6">
+                <div class="bg-white/80 backdrop-blur-sm rounded-xl p-8 border border-kora-beige card-hover">
+                    <div class="w-16 h-16 bg-kora-gold rounded-xl flex items-center justify-center mb-6">
                         <svg class="w-8 h-8 text-kora-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-kora-white mb-4">User-friendly App</h3>
-                    <p class="text-kora-cream">
+                    <h3 class="text-xl font-semibold text-kora-dark mb-4">User-friendly App</h3>
+                    <p class="text-kora-dark">
                         Consumers verify authenticity and transfer ownership through an app without blockchain complexities.
                     </p>
                 </div>
 
                 <!-- Brand Dashboard -->
-                <div class="bg-kora-white/10 backdrop-blur-sm rounded-xl p-8 border border-kora-white/20 card-hover">
-                    <div class="w-16 h-16 gold-gradient rounded-xl flex items-center justify-center mb-6">
+                <div class="bg-white/80 backdrop-blur-sm rounded-xl p-8 border border-kora-beige card-hover">
+                    <div class="w-16 h-16 bg-kora-gold rounded-xl flex items-center justify-center mb-6">
                         <svg class="w-8 h-8 text-kora-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-kora-white mb-4">Brand Dashboard</h3>
-                    <p class="text-kora-cream">
+                    <h3 class="text-xl font-semibold text-kora-dark mb-4">Brand Dashboard</h3>
+                    <p class="text-kora-dark">
                         Bulk registration, real-time ownership tracking, analytics, and alerts for suspicious activity.
                     </p>
                 </div>
 
                 <!-- Easy API Integration -->
-                <div class="bg-kora-white/10 backdrop-blur-sm rounded-xl p-8 border border-kora-white/20 card-hover">
-                    <div class="w-16 h-16 gold-gradient rounded-xl flex items-center justify-center mb-6">
+                <div class="bg-white/80 backdrop-blur-sm rounded-xl p-8 border border-kora-beige card-hover">
+                    <div class="w-16 h-16 bg-kora-gold rounded-xl flex items-center justify-center mb-6">
                         <svg class="w-8 h-8 text-kora-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-kora-white mb-4">Easy API Integration</h3>
-                    <p class="text-kora-cream">
+                    <h3 class="text-xl font-semibold text-kora-dark mb-4">Easy API Integration</h3>
+                    <p class="text-kora-dark">
                         Brands and marketplaces integrate with existing systems to automate registration and ownership transfers.
                     </p>
                 </div>
 
                 <!-- DPP Compliance -->
-                <div class="bg-kora-white/10 backdrop-blur-sm rounded-xl p-8 border border-kora-white/20 card-hover">
-                    <div class="w-16 h-16 gold-gradient rounded-xl flex items-center justify-center mb-6">
+                <div class="bg-white/80 backdrop-blur-sm rounded-xl p-8 border border-kora-beige card-hover">
+                    <div class="w-16 h-16 bg-kora-gold rounded-xl flex items-center justify-center mb-6">
                         <svg class="w-8 h-8 text-kora-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-kora-white mb-4">Digital Product Passport Compliance</h3>
-                    <p class="text-kora-cream">
+                    <h3 class="text-xl font-semibold text-kora-dark mb-4">Digital Product Passport Compliance</h3>
+                    <p class="text-kora-dark">
                         Ready for 2026 mandates, securing EU market access and meeting regulatory standards.
                     </p>
                 </div>
@@ -523,15 +560,15 @@
     <!-- ================================================ -->
     <!-- DIGITAL PRODUCT PASSPORT READY SECTION -->
     <!-- ================================================ -->
-    <section id="dpp-ready" class="py-20 bg-white">
+    <section id="dpp-ready" class="py-20 bg-kora-beige">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <!-- Content -->
                 <div>
                     <h2 class="text-4xl md:text-5xl font-bold text-kora-dark mb-6">
-                        <span class="gradient-text">Digital Product Passport</span> Ready
+                        <span class="text-kora-primary font-bold">Digital Product Passport</span> Ready
                     </h2>
-                    <p class="text-xl text-kora-secondary mb-8">
+                    <p class="text-xl text-kora-dark mb-8">
                         Comprehensive compliance with upcoming EU regulations for seamless market access
                     </p>
                     
@@ -543,7 +580,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <span class="text-kora-secondary text-sm">Product identification</span>
+                                <span class="text-kora-dark text-sm">Product identification</span>
                             </div>
                             <div class="flex items-center gap-3">
                                 <div class="w-6 h-6 brand-gradient rounded-full flex items-center justify-center flex-shrink-0">
@@ -551,7 +588,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <span class="text-kora-secondary text-sm">Material and component data</span>
+                                <span class="text-kora-dark text-sm">Material and component data</span>
                             </div>
                             <div class="flex items-center gap-3">
                                 <div class="w-6 h-6 brand-gradient rounded-full flex items-center justify-center flex-shrink-0">
@@ -559,7 +596,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <span class="text-kora-secondary text-sm">Supply chain information</span>
+                                <span class="text-kora-dark text-sm">Supply chain information</span>
                             </div>
                             <div class="flex items-center gap-3">
                                 <div class="w-6 h-6 brand-gradient rounded-full flex items-center justify-center flex-shrink-0">
@@ -567,7 +604,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <span class="text-kora-secondary text-sm">Sustainability & environmental impact</span>
+                                <span class="text-kora-dark text-sm">Sustainability & environmental impact</span>
                             </div>
                             <div class="flex items-center gap-3">
                                 <div class="w-6 h-6 brand-gradient rounded-full flex items-center justify-center flex-shrink-0">
@@ -575,7 +612,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <span class="text-kora-secondary text-sm">Usage and maintenance info</span>
+                                <span class="text-kora-dark text-sm">Usage and maintenance info</span>
                             </div>
                         </div>
                         <div class="space-y-4">
@@ -585,7 +622,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <span class="text-kora-secondary text-sm">End-of-life and circular economy</span>
+                                <span class="text-kora-dark text-sm">End-of-life and circular economy</span>
                             </div>
                             <div class="flex items-center gap-3">
                                 <div class="w-6 h-6 brand-gradient rounded-full flex items-center justify-center flex-shrink-0">
@@ -593,7 +630,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <span class="text-kora-secondary text-sm">Data accessibility & Privacy</span>
+                                <span class="text-kora-dark text-sm">Data accessibility & Privacy</span>
                             </div>
                             <div class="flex items-center gap-3">
                                 <div class="w-6 h-6 brand-gradient rounded-full flex items-center justify-center flex-shrink-0">
@@ -601,7 +638,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <span class="text-kora-secondary text-sm">Ownership History (for resale/secondary market tracking)</span>
+                                <span class="text-kora-dark text-sm">Ownership History (for resale/secondary market tracking)</span>
                             </div>
                             <div class="flex items-center gap-3">
                                 <div class="w-6 h-6 brand-gradient rounded-full flex items-center justify-center flex-shrink-0">
@@ -609,7 +646,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <span class="text-kora-secondary text-sm">Digital Twins / NFTs (especially in luxury or collectibles)</span>
+                                <span class="text-kora-dark text-sm">Digital Twins / NFTs (especially in luxury or collectibles)</span>
                             </div>
                             <div class="flex items-center gap-3">
                                 <div class="w-6 h-6 brand-gradient rounded-full flex items-center justify-center flex-shrink-0">
@@ -617,7 +654,7 @@
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                     </svg>
                                 </div>
-                                <span class="text-kora-secondary text-sm">ESG Reporting Integration (for corporate responsibility reporting)</span>
+                                <span class="text-kora-dark text-sm">ESG Reporting Integration (for corporate responsibility reporting)</span>
                             </div>
                         </div>
                     </div>
@@ -632,7 +669,7 @@
                             </svg>
                         </div>
                         <h3 class="text-2xl font-bold text-kora-dark mb-4">2026 Ready</h3>
-                        <p class="text-kora-secondary mb-6">
+                        <p class="text-kora-dark mb-6">
                             Fully compliant with upcoming EU Digital Product Passport regulations
                         </p>
                         <div class="bg-kora-primary/10 rounded-lg p-4">
@@ -736,9 +773,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold text-kora-dark mb-6">
-                    Built for <span class="gradient-text">Brands</span>. Loved by <span class="gradient-text">Consumers</span>.
+                    Built for <span class="text-kora-primary font-bold">Brands</span>. Loved by <span class="text-kora-primary font-bold">Consumers</span>.
                 </h2>
-                <p class="text-xl text-kora-secondary max-w-3xl mx-auto">
+                <p class="text-xl text-kora-dark max-w-3xl mx-auto">
                     Creating value for brands while delivering seamless experiences for consumers
                 </p>
             </div>
@@ -764,7 +801,7 @@
                             </div>
                             <div>
                                 <h4 class="text-lg font-semibold text-kora-dark mb-2">Protect Brand Integrity</h4>
-                                <p class="text-kora-secondary">Prevent counterfeiting with blockchain-secured product authentication</p>
+                                <p class="text-kora-dark">Prevent counterfeiting with blockchain-secured product authentication</p>
                             </div>
                         </div>
                         
@@ -776,7 +813,7 @@
                             </div>
                             <div>
                                 <h4 class="text-lg font-semibold text-kora-dark mb-2">New Revenue Streams</h4>
-                                <p class="text-kora-secondary">Monetize secondary market sales with transparent tracking</p>
+                                <p class="text-kora-dark">Monetize secondary market sales with transparent tracking</p>
                             </div>
                         </div>
                         
@@ -788,7 +825,7 @@
                             </div>
                             <div>
                                 <h4 class="text-lg font-semibold text-kora-dark mb-2">Future-Proof Compliance</h4>
-                                <p class="text-kora-secondary">Stay ahead of Digital Product Passport regulations</p>
+                                <p class="text-kora-dark">Stay ahead of Digital Product Passport regulations</p>
                             </div>
                         </div>
                     </div>
@@ -814,7 +851,7 @@
                             </div>
                             <div>
                                 <h4 class="text-lg font-semibold text-kora-dark mb-2">Instant Verification</h4>
-                                <p class="text-kora-secondary">Quickly verify product authenticity with a simple scan</p>
+                                <p class="text-kora-dark">Quickly verify product authenticity with a simple scan</p>
                             </div>
                         </div>
                         
@@ -826,7 +863,7 @@
                             </div>
                             <div>
                                 <h4 class="text-lg font-semibold text-kora-dark mb-2">User-Friendly Experience</h4>
-                                <p class="text-kora-secondary">No blockchain knowledge required - just scan and verify</p>
+                                <p class="text-kora-dark">No blockchain knowledge required - just scan and verify</p>
                             </div>
                         </div>
                         
@@ -838,7 +875,7 @@
                             </div>
                             <div>
                                 <h4 class="text-lg font-semibold text-kora-dark mb-2">Seamless Resale</h4>
-                                <p class="text-kora-secondary">Easy ownership transfer when buying or selling</p>
+                                <p class="text-kora-dark">Easy ownership transfer when buying or selling</p>
                             </div>
                         </div>
                     </div>
@@ -850,13 +887,13 @@
     <!-- ================================================ -->
     <!-- CONTACT SECTION -->
     <!-- ================================================ -->
-    <section id="contact" class="py-20 bg-kora-cream">
+    <section id="contact" class="py-20 bg-kora-beige">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold text-kora-dark mb-6">
-                    Get in <span class="gradient-text">Touch</span>
+                    Get in <span class="text-kora-primary font-bold">Touch</span>
                 </h2>
-                <p class="text-xl text-kora-secondary max-w-3xl mx-auto">
+                <p class="text-xl text-kora-dark max-w-3xl mx-auto">
                     Ready to secure your products and unlock new revenue streams? Let's discuss how Kora can transform your business.
                 </p>
             </div>
@@ -891,7 +928,7 @@
                             <textarea id="message" name="message" rows="6" class="w-full px-4 py-3 bg-white border border-kora-beige rounded-lg focus:ring-2 focus:ring-kora-primary focus:border-transparent text-kora-dark placeholder-kora-secondary resize-none" placeholder="Tell us about your needs..."></textarea>
                         </div>
                         
-                        <button type="submit" class="w-full brand-gradient text-kora-white py-4 px-6 rounded-lg font-semibold text-lg sophisticated-shadow hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <button type="submit" class="w-full bg-kora-primary-dark text-kora-cream py-4 px-6 rounded-lg font-semibold text-lg sophisticated-shadow hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                             Send Message
                         </button>
                     </form>
@@ -971,12 +1008,25 @@
             });
 
             // Mobile menu toggle
-            const mobileMenuButton = document.querySelector('.md\\:hidden button');
-            const navigation = document.querySelector('.md\\:hidden > div');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
             
-            if (mobileMenuButton && navigation) {
+            if (mobileMenuButton && mobileMenu) {
                 mobileMenuButton.addEventListener('click', function() {
-                    navigation.classList.toggle('hidden');
+                    mobileMenu.classList.toggle('hidden');
+                    
+                    // Toggle aria-expanded for accessibility
+                    const isExpanded = !mobileMenu.classList.contains('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', isExpanded);
+                });
+                
+                // Close mobile menu when clicking on a link
+                const mobileLinks = mobileMenu.querySelectorAll('a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    });
                 });
             }
 
@@ -1019,19 +1069,21 @@
                 }
             });
 
-            // Hero carousel functionality
+            // Hero carousel functionality - only runs when carousel is visible
+            const carouselContainer = document.querySelector('.hero-background-carousel');
             const carouselSlides = document.querySelectorAll('.carousel-slide');
             let currentSlide = 0;
+            let carouselInterval;
 
             function nextSlide() {
                 carouselSlides[currentSlide].style.opacity = '0';
                 currentSlide = (currentSlide + 1) % carouselSlides.length;
-                carouselSlides[currentSlide].style.opacity = '0.2';
+                carouselSlides[currentSlide].style.opacity = '0.5';
             }
 
-            // Auto-advance carousel every 5 seconds
-            if (carouselSlides.length > 0) {
-                setInterval(nextSlide, 5000);
+            // Only start carousel if it's visible (not display: none)
+            if (carouselContainer && window.getComputedStyle(carouselContainer).display !== 'none' && carouselSlides.length > 0) {
+                carouselInterval = setInterval(nextSlide, 5000);
             }
         });
     </script>
